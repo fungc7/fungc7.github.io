@@ -1,3 +1,5 @@
+const { useState } = React;
+
 const planets = [
   {
     id: '1',
@@ -71,17 +73,29 @@ const planets = [
 
 // 1: Create a 'Planet' component that renders a planet card
 const Planet = (props) => {
+  const [showCard, setShowCard] = useState(true);
   return (
-    <div className={"card"}>
-      <div>
-        <img src={props.planetUrl} alt={props.planetName}></img>
-      </div>
-      <h2>{props.planetName}</h2>
-      <p>{props.desc}</p>
-      <ul>
-        <li><strong>Diameter:</strong> {props.diameter}</li>
-        <li><strong>Moons:</strong> {props.moons}</li>
-      </ul>
+    <div>
+      { showCard ? 
+        <div
+          className={"card"}
+        >
+            <button 
+            type="button" 
+            class="btn btn-close float-end"
+            aria-label="Close"
+            onClick={() => setShowCard(!showCard)}
+            >X</button>
+          <div>
+            <img src={props.planetUrl} alt={props.planetName}></img>
+          </div>
+          <h2>{props.planetName}</h2>
+          <p>{props.desc}</p>
+          <ul>
+            <li><strong>Diameter:</strong> {props.diameter}</li>
+            <li><strong>Moons:</strong> {props.moons}</li>
+          </ul>
+        </div> : null }
     </div>
   );
 }
